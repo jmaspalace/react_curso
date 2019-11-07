@@ -23,7 +23,8 @@ class App extends Component {
 		],
 		persons2 : [
 			{name: 'Diego3', age : 31 }
-		]
+		],
+		showPersons : false
 	}
 
 	switchNameHandler = (newName) => {
@@ -47,6 +48,16 @@ class App extends Component {
 
 	}
 
+
+	togglePersonsHandler = (event) => {
+
+		const doesShow = this.state.showPersons;
+		this.setState ({
+			showPersons : !doesShow
+		})
+
+	}
+
 	render(){
 
 		const style = {
@@ -58,37 +69,45 @@ class App extends Component {
 		}
 
 		return (
-			<div className="App"> Hello world!!! 
-			<br /><br />
+			<div className="App"> 
+				Hello world!!! 
+				<br /><br />
+				<button
+					style={style} 
+					onClick={this.togglePersonsHandler}>
+					Switch Name
+				</button>
+				
+				{ this.state.showPersons ? 
 
-			<button
-				style={style} 
-				onClick={this.switchNameHandler.bind(this, 'Lia')}>
-				Switch Name
-			</button>
-				<Person 
-					name={this.state.persons[0].name} 
-					age={this.state.persons[0].age}
-					click={this.switchNameHandler.bind(this, 'Lia!!')} >
- 
-				</Person>
-				<Person 
-					name={this.state.persons[1].name} 
-					age={this.state.persons[1].age}  
-					changed={this.nameChangedHandler}
-					> 
-				</Person>
-				<Person 
-					name={this.state.persons2[0].name} 
-					age={this.state.persons2[0].age}  
-					changed={this.nameChangedHandler}
-					> 
-				</Person>
+					<div>
+						<Person 
+							name={this.state.persons[0].name} 
+							age={this.state.persons[0].age}
+							click={this.switchNameHandler.bind(this, 'Lia!!')} >
+ 						</Person>
+						<Person 
+							name={this.state.persons[1].name} 
+							age={this.state.persons[1].age}  
+							changed={this.nameChangedHandler} 
+							> 
+						</Person>
+						<Person 
+							name={this.state.persons2[0].name} 
+							age={this.state.persons2[0].age}  
+							changed={this.nameChangedHandler}
+							> 
+						</Person>
+					 </div>
+				: 
 
+				<Person ></Person>
+
+				 }
 
 			</div>
-		);
-	}
+		);//End Return
+	}//End Render
 }
   
 export default App;
